@@ -1,0 +1,28 @@
+services:
+  backend:
+    image: manager-service
+    ports:
+      - "443:80"
+    networks:
+      - back-tier
+      - front-tier
+
+  database:
+    image: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/etc/data
+    networks:
+      - back-tier
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+
+volumes:
+  db-data:
+networks:
+  # The presence of these objects is sufficient to define them
+  front-tier: {}
+  back-tier: {}
+  single-tier: {}
